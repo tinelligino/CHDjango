@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from ProyectoMVT1.ProyectoMVT1.views import bienvenida
+from .import views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('registrofamiliar/', views.bienvenida),
+    path('registro/', views.registro),
 ]
+
