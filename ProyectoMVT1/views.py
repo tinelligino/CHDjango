@@ -3,51 +3,47 @@ from django.http import HttpResponse
 from django.template import loader
 from AppCoder.models import Persona
 
+
 def bienvenida(request):
     return HttpResponse("Pablo, 25 años, Argentina, 21/01")
+
 
 def registro(request):
     template = loader.get_template("template01.html")
     diccionario = {
-        "nombre01":"Guillermo Tinelli",
-        "nombre02":"Paola Bafundo",
-        "nombre03":"Giovanni Tinelli",
-        "nombre04":"Gino Tinelli",
+        "nombre01":"Sergio",
+        "nombre02":"Andrea",
+        "nombre03":"Josefina",
+        "nombre04":"Santiago",
         }
     response = template.render(diccionario)
     return HttpResponse(response)
 
-def registrobd(request):
+def familia(request):
     personas = Persona.objects.all()
     if len(personas)==0:
         Persona.objects.create(
-        nombre = "Guillermo Tinelli",
-        salario = 150,
-        fecha = "1979-04-10"
+        nombre = "Sergio",
+        salario = 80,
+        fecha = "1971-03-12"
         )
         Persona.objects.create(
-            nombre = "Paola Bafundo",
-            salario = 95,
-            fecha = "1980-07-18"
+            nombre = "Andrea",
+            salario = 35,
+            fecha = "1966-07-21"
         )
         Persona.objects.create(
-            nombre = "Giovanni Tinelli",
-            salario = 30,
-            fecha = "2004-02-21"
+            nombre = "Josefina",
+            salario = 100,
+            fecha = "2006-07-04"
         )
         Persona.objects.create(
-            nombre = "Gino Tinelli",
-            salario = 30,
-            fecha = "2001-11-01"
+            nombre = "Santiago",
+            salario = 80,
+            fecha = "2002-06-10"
         )
     personas = Persona.objects.all().order_by("nombre")
     template = loader.get_template("template02.html")
-    # diccionario = {
-        # "nombre01":"Guillermo Tinelli",
-        # "nombre02":"Paola Bafundo",
-        # "nombre03":"Giovanni Tinelli",
-        # "nombre04":"Gino Tinelli",
-        # }
     diccionario = {
         "nombre01":personas[0].nombre,
         "nombre02":personas[1].nombre,
@@ -64,4 +60,3 @@ def registrobd(request):
     }
     response = template.render(diccionario)
     return HttpResponse(response)
-
